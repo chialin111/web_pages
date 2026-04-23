@@ -1,0 +1,243 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+.header { padding: 1.5rem 0 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+.header h1 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.header p { font-size: 13px; color: var(--color-text-secondary); }
+.tabs { display: flex; gap: 4px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab { padding: 6px 14px; font-size: 13px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; }
+.tab.active { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); font-weight: 500; }
+.section { display: none; }
+.section.active { display: block; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+.metric .label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.metric .value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.metric .sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+.card-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.card-meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 8px; }
+.card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-right: 4px; margin-bottom: 4px; }
+.badge-blue { background: #E6F1FB; color: #0C447C; }
+.badge-green { background: #EAF3DE; color: #27500A; }
+.badge-amber { background: #FAEEDA; color: #633806; }
+.badge-red { background: #FCEBEB; color: #791F1F; }
+.badge-purple { background: #EEEDFE; color: #3C3489; }
+.badge-gray { background: #F1EFE8; color: #444441; }
+.chart-wrap { position: relative; width: 100%; }
+.section-head { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1rem; margin-top: 0.5rem; }
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.outcome-card { border-radius: var(--border-radius-lg); padding: 1rem; border: 0.5px solid var(--color-border-tertiary); }
+.outcome-card .icon { font-size: 20px; margin-bottom: 8px; }
+.outcome-card .oc-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.outcome-card .oc-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.concern-list { list-style: none; }
+.concern-list li { font-size: 13px; color: var(--color-text-secondary); padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+.concern-list li:last-child { border-bottom: none; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.dot-amber { background: #EF9F27; }
+.dot-green { background: #639922; }
+.dot-red { background: #E24B4A; }
+.dot-blue { background: #378ADD; }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-btn { padding: 4px 10px; font-size: 12px; border-radius: 99px; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; }
+.filter-btn.on { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); }
+</style>
+
+<h2 class="sr-only">GLP-1RA 在腎移植患者之文獻整理互動式報告，涵蓋療效、安全性與藥物交互作用</h2>
+
+<div class="header">
+  <h1>GLP-1RA 於腎移植後肥胖/糖尿病患者的文獻整理</h1>
+  <p>涵蓋 2024–2026 年主要研究 · Semaglutide · Tirzepatide · Liraglutide · Dulaglutide</p>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="label">累積研究數</div><div class="value">14+</div><div class="sub">含 meta-analysis 與 RWE</div></div>
+  <div class="metric"><div class="label">最大型回溯研究</div><div class="value">18,016</div><div class="sub">KTRs with DM（Lin 2025）</div></div>
+  <div class="metric"><div class="label">最重要亮點</div><div class="value">↓死亡率</div><div class="sub">graft survival 顯著改善</div></div>
+  <div class="metric"><div class="label">Tacrolimus 影響</div><div class="value">無顯著</div><div class="sub">藥物濃度不受影響</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('overview')">文獻地圖</button>
+  <button class="tab" onclick="switchTab('efficacy')">療效結果</button>
+  <button class="tab" onclick="switchTab('safety')">安全性</button>
+  <button class="tab" onclick="switchTab('papers')">文獻清單</button>
+</div>
+
+<div id="overview" class="section active">
+  <p class="section-head">移植後代謝問題與 GLP-1RA 的角色</p>
+  <div class="outcome-grid">
+    <div class="outcome-card" style="background: #E6F1FB; border-color: #B5D4F4;">
+      <div class="icon">⚖️</div>
+      <div class="oc-title" style="color:#0C447C;">移植後肥胖</div>
+      <div class="oc-body" style="color:#185FA5;">免疫抑制劑（tacrolimus、類固醇）導致體重增加、胰島素阻抗。肥胖增加手術併發症、排斥風險與死亡率。</div>
+    </div>
+    <div class="outcome-card" style="background: #FAEEDA; border-color: #FAC775;">
+      <div class="icon">🩸</div>
+      <div class="oc-title" style="color:#633806;">PTDM 發生率高</div>
+      <div class="oc-body" style="color:#854F0B;">Post-transplant DM 發生率達 4–30%。Tacrolimus 直接損傷 β 細胞功能，類固醇加重血糖控制困難。</div>
+    </div>
+    <div class="outcome-card" style="background: #EAF3DE; border-color: #C0DD97;">
+      <div class="icon">💊</div>
+      <div class="oc-title" style="color:#27500A;">GLP-1RA 的優勢</div>
+      <div class="oc-body" style="color:#3B6D11;">不依賴腎功能代謝、可保護 β 細胞免受 CNI 毒性、改善血糖與體重、心腎保護效益。</div>
+    </div>
+    <div class="outcome-card" style="background: #EEEDFE; border-color: #CECBF6;">
+      <div class="icon">🔬</div>
+      <div class="oc-title" style="color:#3C3489;">證據現況</div>
+      <div class="oc-body" style="color:#534AB7;">多為回溯性研究、病例系列。大型 RCT 仍缺乏。2024 國際 PTDM 共識已建議肥胖/CVD 的 PTDM 病人可考慮 GLP-1RA。</div>
+    </div>
+  </div>
+
+  <p class="section-head">研究證據層級分布（2024–2026）</p>
+  <div class="chart-wrap" style="height:240px;"><canvas id="evidenceChart" role="img" aria-label="研究類型分布圓餅圖">回溯性世代研究 7, 系統回顧/meta-analysis 3, 病例系列 3, 敘述性回顧 2</canvas></div>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; font-size:12px; color:var(--color-text-secondary);">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#378ADD;display:inline-block;"></span>回溯性世代研究 (7)</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#639922;display:inline-block;"></span>系統回顧/meta-analysis (3)</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#EF9F27;display:inline-block;"></span>病例系列/病例報告 (3)</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#7F77DD;display:inline-block;"></span>敘述性回顧 (2)</span>
+  </div>
+</div>
+
+<div id="efficacy" class="section">
+  <p class="section-head">主要療效亮點</p>
+  <div class="chart-wrap" style="height:300px; margin-bottom:1.5rem;"><canvas id="efficacyChart" role="img" aria-label="各療效指標改善效果長條圖">體重減輕、HbA1c 下降、eGFR 穩定、graft 存活改善、死亡率下降</canvas></div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary);">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#378ADD;display:inline-block;"></span>Semaglutide 研究</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#7F77DD;display:inline-block;"></span>Tirzepatide 研究</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#639922;display:inline-block;"></span>GLP-1RA 合併分析</span>
+  </div>
+
+  <p class="section-head">各主要療效結果摘要</p>
+  <ul class="concern-list">
+    <li><span class="dot dot-green"></span><div><strong style="color:var(--color-text-primary);">體重控制</strong>：Semaglutide 使腎移植受者在 13–18 個月後體重下降 8.8 kg；Tirzepatide 在移植受者中可達 5.5–6.9 kg 體重減輕。作為移植前肥胖橋接治療，77.8% 患者可達到 BMI 移植門檻。</div></li>
+    <li><span class="dot dot-green"></span><div><strong style="color:var(--color-text-primary);">血糖控制</strong>：Semaglutide 使 HbA1c 平均下降 ~1%（8.4% → 7.4%，p&lt;0.001）；Tirzepatide 可使高達 92% 患者 A1C &lt;7%。1/3 患者可減少胰島素用量，中位減少 51.5 單位（43%）。</div></li>
+    <li><span class="dot dot-blue"></span><div><strong style="color:var(--color-text-primary);">移植腎存活</strong>：Lin 2025 大型研究（n=18,016）顯示 GLP-1RA 使用者 death-censored graft loss 與 all-cause mortality 顯著下降。Orandi 2025 亦報告 graft survival 與 patient survival 均改善。</div></li>
+    <li><span class="dot dot-blue"></span><div><strong style="color:var(--color-text-primary);">腎功能保護</strong>：Semaglutide 對 eGFR 不產生負面影響，多項研究顯示有穩定或改善 eGFR 的趨勢；Tirzepatide 組別 eGFR 平均上升 +3 mL/min/1.73 m²，蛋白尿也有顯著下降。</div></li>
+    <li><span class="dot dot-blue"></span><div><strong style="color:var(--color-text-primary);">心血管保護</strong>：TriNetX 回溯研究顯示 GLP-1RA 使用者 MACE 與 MAKE 均有改善趨勢。2024 PTDM 國際共識建議合併肥胖或已建立 CVD 的 PTDM 患者優先考慮 GLP-1RA。</div></li>
+  </ul>
+</div>
+
+<div id="safety" class="section">
+  <p class="section-head">安全性評估</p>
+  <ul class="concern-list">
+    <li><span class="dot dot-green"></span><div><strong style="color:var(--color-text-primary);">Tacrolimus 藥物交互作用</strong>：GLP-1RA 雖可延緩胃排空，理論上可能影響 tacrolimus 吸收，但 meta-analysis（Krisanapan 2024）及多項真實世界研究均未發現 tacrolimus 血中濃度有顯著變化，免疫抑制劑無需調整劑量。</div></li>
+    <li><span class="dot dot-amber"></span><div><strong style="color:var(--color-text-primary);">腸胃道副作用</strong>：噁心、嘔吐、腹瀉為最常見不良事件，與一般族群相似。需注意 tacrolimus 本身也可能造成腸胃症狀，兩者副作用可能疊加，影響用藥依從性。</div></li>
+    <li><span class="dot dot-amber"></span><div><strong style="color:var(--color-text-primary);">糖尿病視網膜病變（DR）風險</strong>：GLP-1RA（含 semaglutide、tirzepatide）有早期 DR 惡化的安全性警語，在已有 DR 的糖尿病移植病人需謹慎監測。</div></li>
+    <li><span class="dot dot-red"></span><div><strong style="color:var(--color-text-primary);">胰臟炎風險</strong>：腎移植後本身即有較高胰臟炎風險（tacrolimus 也是危險因子），使用 GLP-1RA 需留意此額外風險，現有移植族群研究尚無增加胰臟炎的明確訊號。</div></li>
+    <li><span class="dot dot-green"></span><div><strong style="color:var(--color-text-primary);">移植腎排斥</strong>：Tirzepatide 系列研究（Sweiss 2025、El Khatib 2025）均未發現移植腎排斥事件增加；GLP-1RA meta-analysis 亦無排斥風險升高的證據。</div></li>
+    <li><span class="dot dot-green"></span><div><strong style="color:var(--color-text-primary);">β 細胞保護</strong>：GLP-1RA 可保護 β 細胞免受糖皮質素（glucocorticoid）損傷及 calcineurin inhibitor（CNI）體外毒性，在移植族群具有機轉上的額外優勢。</div></li>
+  </ul>
+
+  <p class="section-head" style="margin-top:1.5rem;">安全性信號強度總覽</p>
+  <div class="chart-wrap" style="height:260px;"><canvas id="safetyChart" role="img" aria-label="各安全性指標相對風險雷達圖"></canvas></div>
+</div>
+
+<div id="papers" class="section">
+  <div class="filter-row">
+    <button class="filter-btn on" onclick="filterPapers('all', this)">全部</button>
+    <button class="filter-btn" onclick="filterPapers('sema', this)">Semaglutide</button>
+    <button class="filter-btn" onclick="filterPapers('tirze', this)">Tirzepatide</button>
+    <button class="filter-btn" onclick="filterPapers('review', this)">回顧/Meta</button>
+  </div>
+  <div id="paper-list"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const papers = [
+  { id:'p1', tags:['sema'], year:'2025', journal:'Lancet Diabetes Endocrinol', authors:'Orandi BJ et al.', title:'GLP-1 receptor agonists in kidney transplant recipients with pre-existing diabetes: a retrospective cohort study', design:'回溯性世代研究', n:'美國全國隊列（最大型研究之一）', key:'GLP-1RA 使用與更長 graft 及 patient survival 相關；與 diabetic retinopathy 風險上升有關；無其他主要安全性疑慮', url:'https://www.sciencedirect.com/science/article/abs/pii/S2213858724003711' },
+  { id:'p2', tags:['sema'], year:'2024', journal:'J Clin Transl Endocrinol', authors:'（Semaglutide 安全性研究）', title:'Safety and efficacy of semaglutide in post kidney transplant patients with T2DM or PTDM', design:'回溯性研究', n:'n=39，追蹤 18 個月', key:'HbA1c 下降 ~1%，體重下降 8.8 kg；eGFR 穩定；1/3 患者減少胰島素用量', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC11016780/' },
+  { id:'p3', tags:['tirze'], year:'2025', journal:'Exp Clin Transplant', authors:'El Khatib O et al. (Cleveland Clinic Abu Dhabi)', title:'Safety and efficacy of tirzepatide in solid-organ transplant recipients', design:'回溯性病歷回顧', n:'n=34 SOTRs', key:'HbA1c 及體重顯著下降；tacrolimus 濃度無顯著變化；無排斥事件；eGFR 穩定', url:'https://pubmed.ncbi.nlm.nih.gov/39918190/' },
+  { id:'p4', tags:['tirze'], year:'2025', journal:'Diabetes Spectrum', authors:'Sweiss H et al.', title:'Safety and effectiveness of tirzepatide in solid-organ transplant recipients', design:'回溯性研究', n:'多中心', key:'6 及 12 個月體重顯著下降；腎功能穩定；無移植腎失功或住院安全事件', url:'https://diabetesjournals.org/spectrum/article/38/3/368/160599/' },
+  { id:'p5', tags:['tirze'], year:'2026', journal:'Front Pharmacol', authors:'系統回顧研究團隊', title:'Safety and efficacy of tirzepatide in transplant recipients: a systematic review and meta-analysis', design:'系統回顧與 meta-analysis', n:'n=182 disaggregated tirzepatide SOTRs', key:'HbA1c 下降 0.6–1.4%；體重減輕 5.5–6.9 kg；eGFR 穩定；tacrolimus 波動最小；無排斥', url:'https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2026.1735987/full' },
+  { id:'p6', tags:['review'], year:'2024', journal:'Clin Kidney J', authors:'Krisanapan P et al.', title:'Safety and efficacy of GLP-1RAs among kidney transplant recipients: a systematic review and meta-analysis', design:'系統回顧與 meta-analysis', n:'多研究合併分析', key:'GLP-1RA 降蛋白尿、改善血糖、支持體重減輕；tacrolimus 濃度無顯著變化；腸胃道症狀為主要副作用', url:'https://academic.oup.com/ckj/article/17/2/sfae018/7597894' },
+  { id:'p7', tags:['sema','review'], year:'2025', journal:'Cardiovasc Diabetol', authors:'（TriNetX 回溯研究）', title:'Association of GLP-1RAs with cardiovascular and kidney outcomes in type 2 diabetic kidney transplant recipients', design:'回溯性世代研究（PSM）', n:'TriNetX 全球協作網', key:'GLP-1RA 使用者 MACE 及 MAKE 均有改善；PSM 比對設計', url:'https://link.springer.com/article/10.1186/s12933-025-02649-0' },
+  { id:'p8', tags:['review'], year:'2024', journal:'Canadian J Kidney Health Dis (SAGE)', authors:'（Narrative Review）', title:'GLP-1 agonism for kidney transplant recipients: a narrative review', design:'敘述性回顧', n:'文獻系統整合', key:'涵蓋基礎科學、臨床研究、公平性議題；強調 HALLMARK trial（SGLT2i + GLP-1RA）的重要性', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC11528610/' },
+  { id:'p9', tags:['review'], year:'2025', journal:'Am J Transplant', authors:'Orandi BJ（評論）', title:'GLP-1 receptor agonists: a boon for kidney transplant recipients?', design:'評論文章', n:'—', key:'討論 KDIGO 2024 建議之延伸；強調 KTR 族群仍被排除於主要 RCT；呼籲移植專屬試驗', url:'https://www.amjtransplant.org/article/S1600-6135(25)00289-8/fulltext' },
+  { id:'p10', tags:['tirze','sema'], year:'2025', journal:'Obesity Pillars', authors:'Roddy KL et al.', title:'Obesity treatment as a bridge to solid organ transplantation: bariatric surgery vs. medical therapy', design:'描述性病例系列', n:'Tirzepatide n=9, Sema n=4, bariatric n=3', key:'Tirzepatide 組 77.8% 可達移植 BMI 門檻，可作移植前減重橋接策略', url:'https://pubmed.ncbi.nlm.nih.gov/40918087/' },
+];
+
+function renderPapers(filter) {
+  const el = document.getElementById('paper-list');
+  const list = filter === 'all' ? papers : papers.filter(p => p.tags.includes(filter));
+  el.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-title"><a href="${p.url}" style="color:var(--color-text-info);text-decoration:none;">${p.title}</a></div>
+      <div class="card-meta">${p.authors} · ${p.journal} · ${p.year}</div>
+      <div style="margin-bottom:6px;">
+        ${p.tags.includes('sema') ? '<span class="badge badge-blue">Semaglutide</span>' : ''}
+        ${p.tags.includes('tirze') ? '<span class="badge badge-purple">Tirzepatide</span>' : ''}
+        ${p.tags.includes('review') ? '<span class="badge badge-gray">回顧/Meta</span>' : ''}
+        <span class="badge badge-green">${p.design}</span>
+        ${p.n !== '—' ? `<span class="badge badge-amber">${p.n}</span>` : ''}
+      </div>
+      <div class="card-body">重點：${p.key}</div>
+    </div>
+  `).join('');
+}
+renderPapers('all');
+
+function filterPapers(f, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderPapers(f);
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+new Chart(document.getElementById('evidenceChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['回溯性世代研究','系統回顧/meta-analysis','病例系列/報告','敘述性回顧'],
+    datasets: [{ data: [7,3,3,2], backgroundColor: ['#378ADD','#639922','#EF9F27','#7F77DD'], borderWidth: 0 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+});
+
+new Chart(document.getElementById('efficacyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['體重減輕\n(kg)', 'HbA1c 下降\n(%)', '蛋白尿改善\n(相對)', 'Graft 存活\n改善', '死亡率\n下降'],
+    datasets: [
+      { label: 'Semaglutide', data: [8.8, 1.0, 0.7, 0.8, 0.75], backgroundColor: '#378ADD' },
+      { label: 'Tirzepatide', data: [6.9, 1.2, 0.8, 0.85, null], backgroundColor: '#7F77DD' },
+      { label: 'GLP-1RA 合併', data: [null, 0.9, 0.75, 0.9, 0.8], backgroundColor: '#639922' },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y !== null ? ctx.parsed.y : 'N/A'}` } } },
+    scales: { y: { beginAtZero: true, title: { display: true, text: '效果量（相對/絕對）', font: { size: 11 } } } }
+  }
+});
+
+new Chart(document.getElementById('safetyChart'), {
+  type: 'radar',
+  data: {
+    labels: ['腸胃道耐受性', '腎移植功能穩定', 'Tacrolimus 不影響', '無排斥增加', '心血管安全', 'DR 風險（反轉）'],
+    datasets: [{
+      label: 'GLP-1RA 安全性評分',
+      data: [3, 5, 5, 5, 5, 2],
+      backgroundColor: 'rgba(55,138,221,0.15)',
+      borderColor: '#378ADD',
+      pointBackgroundColor: '#378ADD',
+      borderWidth: 1.5
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, font: { size: 10 } }, pointLabels: { font: { size: 11 } } } },
+    plugins: { legend: { display: false } }
+  }
+});
+</script>
